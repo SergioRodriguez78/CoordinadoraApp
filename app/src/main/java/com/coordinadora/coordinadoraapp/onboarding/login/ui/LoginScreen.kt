@@ -10,23 +10,37 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
+import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
+import com.coordinadora.coordinadoraapp.onboarding.login.model.dto.ScreenState
+import com.coordinadora.coordinadoraapp.onboarding.login.viewmodel.LoginViewModel
+import com.coordinadora.coordinadoraapp.ui.LocalNavController
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    viewModel: LoginViewModel
+) {
+    val navigator = LocalNavController.current
 
-    var userName by remember { mutableStateOf("") }
-    var pwd by remember { mutableStateOf("") }
+    val userName by viewModel.username.collectAsStateWithLifecycle()
+    val pwd by viewModel.password.collectAsStateWithLifecycle()
+    val state by viewModel.screenState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(state) {
+        if (state == ScreenState.Success) {
+            navigator.navigate(CoordinadoraRoutes.Home)
+        }
+    }
+
 
     Column(
         Modifier.fillMaxSize(),
@@ -50,7 +64,7 @@ fun LoginScreen() {
 
         TextField(
             value = userName,
-            onValueChange = { userName = it },
+            onValueChange = { viewModel.updateUsername(it) },
             label = {
                 Text(stringResource(R.string.splash_username_label))
             }
@@ -59,7 +73,7 @@ fun LoginScreen() {
         TextField(
             modifier = Modifier.padding(vertical = 16.dp),
             value = pwd,
-            onValueChange = { pwd = it },
+            onValueChange = { viewModel.updatePassword(it) },
             label = {
                 Text(stringResource(R.string.splash_pwd_label))
             }
@@ -67,7 +81,7 @@ fun LoginScreen() {
 
         CoordinadoraButton(
             onClick = {
-
+                viewModel.login(username = userName, password = pwd)
             }
         ) {
             Text(stringResource(R.string.splash_login_button))

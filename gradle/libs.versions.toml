@@ -16,6 +16,13 @@ navcompose = "2.8.3"
 ## Serialization
 kotlinxSerialization = "1.7.1"
 
+### Network
+volley = "1.2.1"
+
+### Hilt
+hiltAndroid = "2.52"
+hiltNavigationCompose = "1.2.0"
+
 [libraries]
 ## Android base dependencies
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +46,14 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 ### Serialization
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
+### Network
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
+
+### Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
 [plugins]
 ## Android base pluggins
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -48,3 +63,5 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 ### Serialization
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
+### Hilt
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }

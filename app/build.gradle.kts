@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization) apply true
+    alias(libs.plugins.hilt.android) apply true
+    id("kotlin-kapt")
 }
 
 android {
@@ -63,4 +65,17 @@ dependencies {
 
     // Serialization
     implementation(libs.kotlinx.serialization)
+
+    // Network
+    implementation(libs.volley)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.hilt.navigation.compose)
+
+}
+
+kapt {
+    correctErrorTypes = true
 }
