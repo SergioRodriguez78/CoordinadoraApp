@@ -1,4 +1,4 @@
-package com.coordinadora.coordinadoraapp.ui.theme
+package com.coordinadora.coordinadoraapp.atomicDesign.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -9,3 +9,6 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val DarkBlue = Color(0xFF1163AD)
+val LightBlue = Color(0xFF5799E8)
