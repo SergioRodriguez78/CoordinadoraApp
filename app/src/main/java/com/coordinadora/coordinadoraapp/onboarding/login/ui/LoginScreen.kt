@@ -21,7 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
 import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
-import com.coordinadora.coordinadoraapp.onboarding.login.model.dto.ScreenState
+import com.coordinadora.coordinadoraapp.core.ScreenState
 import com.coordinadora.coordinadoraapp.onboarding.login.viewmodel.LoginViewModel
 import com.coordinadora.coordinadoraapp.ui.LocalNavController
 
@@ -50,7 +50,7 @@ fun LoginScreen(
     {
         Text(
             modifier = Modifier.padding(bottom = 16.dp),
-            text = stringResource(R.string.splash_title),
+            text = stringResource(R.string.login_title),
             style = MaterialTheme.typography.headlineSmall
         )
 
@@ -66,7 +66,7 @@ fun LoginScreen(
             value = userName,
             onValueChange = { viewModel.updateUsername(it) },
             label = {
-                Text(stringResource(R.string.splash_username_label))
+                Text(stringResource(R.string.login_username_label))
             }
         )
 
@@ -75,7 +75,7 @@ fun LoginScreen(
             value = pwd,
             onValueChange = { viewModel.updatePassword(it) },
             label = {
-                Text(stringResource(R.string.splash_pwd_label))
+                Text(stringResource(R.string.login_pwd_label))
             }
         )
 
@@ -84,7 +84,7 @@ fun LoginScreen(
                 viewModel.login(username = userName, password = pwd)
             }
         ) {
-            Text(stringResource(R.string.splash_login_button))
+            Text(stringResource(R.string.login_login_button))
         }
     }
 

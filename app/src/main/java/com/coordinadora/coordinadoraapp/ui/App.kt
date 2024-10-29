@@ -2,7 +2,6 @@ package com.coordinadora.coordinadoraapp.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
@@ -14,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.coordinadora.coordinadoraapp.atomicDesign.theme.CoordinadoraAppTheme
 import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
+import com.coordinadora.coordinadoraapp.onboarding.home.ui.HomeScreen
 import com.coordinadora.coordinadoraapp.onboarding.login.ui.LoginScreen
 import com.coordinadora.coordinadoraapp.onboarding.splash.ui.SplashScreen
 
@@ -34,11 +34,11 @@ fun App() {
                 ) {
                     composable<CoordinadoraRoutes.Splash> { SplashScreen() }
                     composable<CoordinadoraRoutes.Login> {
-                        LoginScreen(
-                            viewModel = hiltViewModel()
-                        )
+                        LoginScreen(viewModel = hiltViewModel())
                     }
-                    composable<CoordinadoraRoutes.Home> { Text("Ingresaste") }
+                    composable<CoordinadoraRoutes.Home> {
+                        HomeScreen(viewModel = hiltViewModel())
+                    }
                 }
             }
         }

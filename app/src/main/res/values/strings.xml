@@ -2,10 +2,13 @@
     <string name="app_name">CoordinadoraApp</string>
 
     <!-- Onboarding -->
-        <!-- Splash -->
-    <string name="splash_title">Welcome to Coordinadora App!</string>
-    <string name="splash_username_label">Username</string>
-    <string name="splash_pwd_label">Password</string>
-    <string name="splash_login_button">Login</string>
+        <!-- Login -->
+    <string name="login_title">Welcome to Coordinadora App!</string>
+    <string name="login_username_label">Username</string>
+    <string name="login_pwd_label">Password</string>
+    <string name="login_login_button">Login</string>
+
+        <!-- Home -->
+    <string name="home_button">Get data</string>
 
 </resources>

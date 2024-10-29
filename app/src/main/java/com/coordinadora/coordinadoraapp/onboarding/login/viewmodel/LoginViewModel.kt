@@ -3,7 +3,7 @@ package com.coordinadora.coordinadoraapp.onboarding.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
-import com.coordinadora.coordinadoraapp.onboarding.login.model.dto.ScreenState
+import com.coordinadora.coordinadoraapp.core.ScreenState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

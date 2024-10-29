@@ -1,4 +1,4 @@
-package com.coordinadora.coordinadoraapp.onboarding.login.model.dto
+package com.coordinadora.coordinadoraapp.core
 
 sealed interface ScreenState {
     data object Loading : ScreenState

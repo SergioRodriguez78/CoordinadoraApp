@@ -3,6 +3,8 @@ package com.coordinadora.coordinadoraapp.di
 import android.app.Application
 import com.coordinadora.coordinadoraapp.network.client.BaseApiClient
 import com.coordinadora.coordinadoraapp.network.client.VolleyClient
+import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageService
+import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageServiceImpl
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationServiceImpl
 import dagger.Module
@@ -25,5 +27,11 @@ object AppModule {
     @Singleton
     fun provideAuthService(client: BaseApiClient) : AuthenticationService {
         return AuthenticationServiceImpl(client)
+    }
+
+    @Provides
+    @Singleton
+    fun provideImageService(client: BaseApiClient) : ImageService {
+        return ImageServiceImpl(client)
     }
 }
