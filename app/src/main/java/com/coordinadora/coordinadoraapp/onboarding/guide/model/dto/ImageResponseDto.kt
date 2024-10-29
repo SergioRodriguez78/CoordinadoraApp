@@ -1,4 +1,4 @@
-package com.coordinadora.coordinadoraapp.onboarding.home.model.dto
+package com.coordinadora.coordinadoraapp.onboarding.guide.model.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

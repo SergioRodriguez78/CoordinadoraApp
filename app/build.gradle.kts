@@ -77,6 +77,9 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
 
+    // Maps
+    implementation(libs.maps.compose)
+
 }
 
 kapt {

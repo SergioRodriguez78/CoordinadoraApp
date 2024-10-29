@@ -3,6 +3,7 @@ package com.coordinadora.coordinadoraapp.onboarding.login.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,6 +28,7 @@ import com.coordinadora.coordinadoraapp.ui.LocalNavController
 
 @Composable
 fun LoginScreen(
+    innerPadding: PaddingValues,
     viewModel: LoginViewModel
 ) {
     val navigator = LocalNavController.current
@@ -43,7 +45,9 @@ fun LoginScreen(
 
 
     Column(
-        Modifier.fillMaxSize(),
+        Modifier
+            .padding(innerPadding)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     )

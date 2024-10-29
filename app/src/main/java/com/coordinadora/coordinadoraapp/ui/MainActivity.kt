@@ -28,9 +28,6 @@ class MainActivity : ComponentActivity() {
             val allPermissionsGranted = permissions.values.all { it }
             if (allPermissionsGranted) {
                 Toast.makeText(this, "Permissions granted", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "Missing permissions to work properly", Toast.LENGTH_SHORT)
-                    .show()
             }
         }
 

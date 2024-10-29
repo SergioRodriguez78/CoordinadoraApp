@@ -1,9 +1,10 @@
-package com.coordinadora.coordinadoraapp.onboarding.home.ui
+package com.coordinadora.coordinadoraapp.onboarding.guide.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,19 +25,25 @@ import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
 import com.coordinadora.coordinadoraapp.atomicDesign.theme.DarkBlue
 import com.coordinadora.coordinadoraapp.core.ScreenState
-import com.coordinadora.coordinadoraapp.onboarding.home.ui.organism.PdfViewerPager
-import com.coordinadora.coordinadoraapp.onboarding.home.viewmodel.HomeViewModel
+import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
+import com.coordinadora.coordinadoraapp.onboarding.guide.ui.organism.PdfViewerPager
+import com.coordinadora.coordinadoraapp.onboarding.guide.viewmodel.GuideViewModel
+import com.coordinadora.coordinadoraapp.ui.LocalNavController
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel
+    viewModel: GuideViewModel,
+    paddingValues: PaddingValues
 ) {
 
+    val navigator = LocalNavController.current
     val state by viewModel.state.collectAsStateWithLifecycle()
     val bitmaps by viewModel.bitmaps.collectAsStateWithLifecycle()
 
     Column(
-        Modifier.fillMaxSize(),
+        Modifier
+            .fillMaxSize()
+            .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -51,7 +58,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .size(40.dp)
                     .clickable {
-
+                        navigator.navigate(CoordinadoraRoutes.Map)
                     },
                 painter = painterResource(R.drawable.map_icon),
                 contentDescription = null,
@@ -90,7 +97,10 @@ fun HomeScreen(
                 modifier = Modifier.padding(16.dp)
             )
         } else {
-            PdfViewerPager(bitmaps)
+            PdfViewerPager(
+                modifier = Modifier.padding(top = 16.dp, bottom = 32.dp).fillMaxSize(),
+                bitmaps = bitmaps
+            )
         }
     }
 }

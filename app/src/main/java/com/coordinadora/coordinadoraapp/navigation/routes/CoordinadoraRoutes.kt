@@ -14,4 +14,7 @@ sealed interface CoordinadoraRoutes {
     @Serializable
     data object Home : CoordinadoraRoutes
 
+    @Serializable
+    data object Map : CoordinadoraRoutes
+
 }

@@ -3,8 +3,8 @@ package com.coordinadora.coordinadoraapp.di
 import android.app.Application
 import com.coordinadora.coordinadoraapp.network.client.BaseApiClient
 import com.coordinadora.coordinadoraapp.network.client.VolleyClient
-import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageService
-import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageServiceImpl
+import com.coordinadora.coordinadoraapp.onboarding.guide.data.ImageService
+import com.coordinadora.coordinadoraapp.onboarding.guide.data.ImageServiceImpl
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationServiceImpl
 import com.coordinadora.coordinadoraapp.service.pdf.PdfServiceManager

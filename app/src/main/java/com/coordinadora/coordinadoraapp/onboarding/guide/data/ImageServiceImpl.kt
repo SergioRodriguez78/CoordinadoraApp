@@ -1,8 +1,8 @@
-package com.coordinadora.coordinadoraapp.onboarding.home.data
+package com.coordinadora.coordinadoraapp.onboarding.guide.data
 
 import com.android.volley.Request
 import com.coordinadora.coordinadoraapp.network.client.BaseApiClient
-import com.coordinadora.coordinadoraapp.onboarding.home.model.dto.ImageResponseDto
+import com.coordinadora.coordinadoraapp.onboarding.guide.model.dto.ImageResponseDto
 import kotlinx.serialization.json.Json
 import org.json.JSONObject
 

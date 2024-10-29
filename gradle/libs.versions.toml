@@ -26,6 +26,10 @@ hiltNavigationCompose = "1.2.0"
 ### Coil
 coilCompose = "2.7.0"
 
+### Maps
+mapsCompose = "6.1.0"
+
+
 [libraries]
 ## Android base dependencies
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +63,9 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 
 ### Coil
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+
+### Maps
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
 
 [plugins]
 ## Android base pluggins

@@ -1,10 +1,11 @@
-package com.coordinadora.coordinadoraapp.onboarding.home.viewmodel
+package com.coordinadora.coordinadoraapp.onboarding.guide.viewmodel
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coordinadora.coordinadoraapp.core.ScreenState
-import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageService
+import com.coordinadora.coordinadoraapp.onboarding.guide.data.ImageService
+import com.coordinadora.coordinadoraapp.onboarding.guide.model.dto.LocationDto
 import com.coordinadora.coordinadoraapp.service.pdf.PdfServiceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class GuideViewModel @Inject constructor(
     private val service: ImageService,
     private val pdfManager: PdfServiceManager
 ) : ViewModel() {
@@ -27,6 +28,9 @@ class HomeViewModel @Inject constructor(
     private var _state: MutableStateFlow<ScreenState> = MutableStateFlow(ScreenState.None)
     val state = _state.asStateFlow()
 
+    private var _locations: MutableStateFlow<List<LocationDto>> = MutableStateFlow(emptyList())
+    val locations = _locations.asStateFlow()
+
     fun getData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -35,6 +39,8 @@ class HomeViewModel @Inject constructor(
                 service.getImage(
                     onResponse = { response ->
                         if (!response.isError) {
+
+                            _locations.update { response.locations }
 
                             savePdf(response.pdfEncoded)
 
