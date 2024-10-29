@@ -80,6 +80,10 @@ dependencies {
     // Maps
     implementation(libs.maps.compose)
 
+    // Room
+    implementation(libs.room)
+    kapt(libs.room.compiler)
+
 }
 
 kapt {

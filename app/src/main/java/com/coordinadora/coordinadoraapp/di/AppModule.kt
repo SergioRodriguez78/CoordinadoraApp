@@ -1,6 +1,9 @@
 package com.coordinadora.coordinadoraapp.di
 
 import android.app.Application
+import com.coordinadora.coordinadoraapp.database.AppDatabase
+import com.coordinadora.coordinadoraapp.database.dao.UserDao
+import com.coordinadora.coordinadoraapp.database.provider.DatabaseProvider
 import com.coordinadora.coordinadoraapp.network.client.BaseApiClient
 import com.coordinadora.coordinadoraapp.network.client.VolleyClient
 import com.coordinadora.coordinadoraapp.onboarding.guide.data.ImageService
@@ -21,25 +24,37 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNetworkClient(app: Application) : BaseApiClient {
+    fun provideNetworkClient(app: Application): BaseApiClient {
         return VolleyClient(app)
     }
 
     @Provides
     @Singleton
-    fun provideAuthService(client: BaseApiClient) : AuthenticationService {
+    fun provideAuthService(client: BaseApiClient): AuthenticationService {
         return AuthenticationServiceImpl(client)
     }
 
     @Provides
     @Singleton
-    fun provideImageService(client: BaseApiClient) : ImageService {
+    fun provideImageService(client: BaseApiClient): ImageService {
         return ImageServiceImpl(client)
     }
 
     @Provides
     @Singleton
-    fun providePdfManager(context: Application) : PdfServiceManager {
+    fun providePdfManager(context: Application): PdfServiceManager {
         return PdfServiceManagerImpl(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(context: Application): AppDatabase {
+        return DatabaseProvider(context).getDatabase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDao(database: AppDatabase): UserDao {
+        return database.userDao()
     }
 }

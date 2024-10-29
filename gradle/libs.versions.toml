@@ -29,6 +29,10 @@ coilCompose = "2.7.0"
 ### Maps
 mapsCompose = "6.1.0"
 
+### Room
+roomCompiler = "2.6.1"
+roomKtx = "2.6.1"
+
 
 [libraries]
 ## Android base dependencies
@@ -66,6 +70,10 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose"
 
 ### Maps
 maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
+
+### Room
+room = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 
 [plugins]
 ## Android base pluggins
