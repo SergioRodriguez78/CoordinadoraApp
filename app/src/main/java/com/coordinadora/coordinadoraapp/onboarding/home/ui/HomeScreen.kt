@@ -51,7 +51,7 @@ fun HomeScreen(
                     .size(40.dp)
                     .clickable { },
                 painter = painterResource(R.drawable.map_icon),
-                contentDescription = "Home",
+                contentDescription = null,
                 tint = DarkBlue
             )
 
@@ -64,7 +64,9 @@ fun HomeScreen(
             Icon(
                 modifier = Modifier
                     .size(40.dp)
-                    .clickable { },
+                    .clickable {
+                        viewModel.getData()
+                    },
                 painter = painterResource(R.drawable.refresh),
                 contentDescription = "Refresh",
                 tint = DarkBlue
@@ -81,7 +83,9 @@ fun HomeScreen(
         }
 
         if (state == ScreenState.Loading) {
-            LinearProgressIndicator()
+            LinearProgressIndicator(
+                modifier = Modifier.padding(16.dp)
+            )
         } else {
             Text(
                 text = data,

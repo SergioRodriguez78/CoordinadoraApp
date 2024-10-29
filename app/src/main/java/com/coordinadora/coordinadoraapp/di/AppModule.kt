@@ -7,6 +7,8 @@ import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageService
 import com.coordinadora.coordinadoraapp.onboarding.home.data.ImageServiceImpl
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationServiceImpl
+import com.coordinadora.coordinadoraapp.service.pdf.PdfServiceManager
+import com.coordinadora.coordinadoraapp.service.pdf.PdfServiceManagerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +35,11 @@ object AppModule {
     @Singleton
     fun provideImageService(client: BaseApiClient) : ImageService {
         return ImageServiceImpl(client)
+    }
+
+    @Provides
+    @Singleton
+    fun providePdfManager() : PdfServiceManager {
+        return PdfServiceManagerImpl()
     }
 }
