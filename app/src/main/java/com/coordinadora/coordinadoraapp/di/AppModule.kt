@@ -39,7 +39,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePdfManager() : PdfServiceManager {
-        return PdfServiceManagerImpl()
+    fun providePdfManager(context: Application) : PdfServiceManager {
+        return PdfServiceManagerImpl(context)
     }
 }

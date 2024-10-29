@@ -24,6 +24,7 @@ import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
 import com.coordinadora.coordinadoraapp.atomicDesign.theme.DarkBlue
 import com.coordinadora.coordinadoraapp.core.ScreenState
+import com.coordinadora.coordinadoraapp.onboarding.home.ui.organism.PdfViewerPager
 import com.coordinadora.coordinadoraapp.onboarding.home.viewmodel.HomeViewModel
 
 @Composable
@@ -31,8 +32,8 @@ fun HomeScreen(
     viewModel: HomeViewModel
 ) {
 
-    val data by viewModel.image.collectAsStateWithLifecycle()
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val bitmaps by viewModel.bitmaps.collectAsStateWithLifecycle()
 
     Column(
         Modifier.fillMaxSize(),
@@ -49,7 +50,9 @@ fun HomeScreen(
             Icon(
                 modifier = Modifier
                     .size(40.dp)
-                    .clickable { },
+                    .clickable {
+
+                    },
                 painter = painterResource(R.drawable.map_icon),
                 contentDescription = null,
                 tint = DarkBlue
@@ -87,10 +90,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(16.dp)
             )
         } else {
-            Text(
-                text = data,
-                modifier = Modifier.padding(16.dp)
-            )
+            PdfViewerPager(bitmaps)
         }
     }
 }

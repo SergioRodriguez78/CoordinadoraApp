@@ -1,5 +1,6 @@
 package com.coordinadora.coordinadoraapp.onboarding.home.viewmodel
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coordinadora.coordinadoraapp.core.ScreenState
@@ -19,8 +20,9 @@ class HomeViewModel @Inject constructor(
     private val pdfManager: PdfServiceManager
 ) : ViewModel() {
 
-    private var _image = MutableStateFlow("")
-    val image = _image.asStateFlow()
+
+    private var _bitmaps = MutableStateFlow<List<Bitmap>>(emptyList())
+    val bitmaps = _bitmaps.asStateFlow()
 
     private var _state: MutableStateFlow<ScreenState> = MutableStateFlow(ScreenState.None)
     val state = _state.asStateFlow()
@@ -33,9 +35,10 @@ class HomeViewModel @Inject constructor(
                 service.getImage(
                     onResponse = { response ->
                         if (!response.isError) {
-                            _image.update { response.toString() }
 
                             savePdf(response.pdfEncoded)
+
+                            renderPdf(response.pdfEncoded)
 
                             _state.update { ScreenState.None }
                         }
@@ -46,6 +49,17 @@ class HomeViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 _state.update { ScreenState.Error }
+            }
+        }
+    }
+
+    private fun renderPdf(pdfEncode: String) {
+        viewModelScope.launch(Dispatchers.Default) {
+            try {
+                val bitmaps = pdfManager.pdfToBitmap(pdfEncode)
+                _bitmaps.update { bitmaps }
+            } catch (e: Exception) {
+                println("Error rendering PDF: ${e.message}")
             }
         }
     }
