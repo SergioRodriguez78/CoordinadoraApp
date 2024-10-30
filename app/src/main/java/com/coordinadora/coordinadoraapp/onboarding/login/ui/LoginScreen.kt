@@ -71,7 +71,8 @@ fun LoginScreen(
             onValueChange = { viewModel.updateUsername(it) },
             label = {
                 Text(stringResource(R.string.login_username_label))
-            }
+            },
+            singleLine = true
         )
 
         TextField(
@@ -80,7 +81,8 @@ fun LoginScreen(
             onValueChange = { viewModel.updatePassword(it) },
             label = {
                 Text(stringResource(R.string.login_pwd_label))
-            }
+            },
+            singleLine = true
         )
 
         CoordinadoraButton(

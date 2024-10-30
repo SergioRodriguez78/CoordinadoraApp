@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">CoordinadoraApp</string>
 
+    <!-- Common -->
+
+    <string name="common_close">Cerrar</string>
+    <string name="common_back">Go back</string>
+    <string name="expiration_dialog_text">Se ha agotado tu tiempo de validación</string>
+
+
     <!-- Onboarding -->
         <!-- Login -->
     <string name="login_title">Welcome to Coordinadora App!</string>

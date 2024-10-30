@@ -12,8 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
 import com.coordinadora.coordinadoraapp.onboarding.guide.viewmodel.GuideViewModel
 import com.coordinadora.coordinadoraapp.onboarding.guide.ui.organism.CoordinadoraMapDialog
@@ -78,7 +80,7 @@ fun MapScreen(
                 navigator.popBackStack()
             }
         ) {
-            Text("Go back")
+            Text(stringResource(R.string.common_back))
         }
 
         if (openDialog) {

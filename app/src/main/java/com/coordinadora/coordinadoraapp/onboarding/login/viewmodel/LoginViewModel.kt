@@ -2,8 +2,11 @@ package com.coordinadora.coordinadoraapp.onboarding.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
 import com.coordinadora.coordinadoraapp.core.ScreenState
+import com.coordinadora.coordinadoraapp.database.dao.UserDao
+import com.coordinadora.coordinadoraapp.database.mapper.toUser
+import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
+import com.coordinadora.coordinadoraapp.onboarding.login.model.dto.AuthenticationResponseDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val service: AuthenticationService
+    private val service: AuthenticationService,
+    private val dao: UserDao
 ) : ViewModel() {
 
     private var _username = MutableStateFlow("")
@@ -44,6 +48,9 @@ class LoginViewModel @Inject constructor(
                     onResponse = { response ->
                         if (!response.isError) {
                             _state.update { ScreenState.Success }
+
+                            saveUser(username = username, dto = response)
+
                         } else {
                             _state.update { ScreenState.Error }
                         }
@@ -56,6 +63,12 @@ class LoginViewModel @Inject constructor(
             } catch (e: Exception) {
                 _state.update { ScreenState.Error }
             }
+        }
+    }
+
+    private fun saveUser(username: String, dto: AuthenticationResponseDto) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.save(dto.toUser(username))
         }
     }
 }

@@ -7,24 +7,36 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.theme.DarkBlue
-import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
+import com.coordinadora.coordinadoraapp.onboarding.splash.viewmodel.SplashViewModel
 import com.coordinadora.coordinadoraapp.ui.LocalNavController
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(
+    viewModel: SplashViewModel
+) {
 
     val navController = LocalNavController.current
 
+    val navigateTo by viewModel.navigateToRoute.collectAsStateWithLifecycle(null)
+
+    LaunchedEffect(navigateTo) {
+        navigateTo?.let { route ->
+            delay(2000)
+            navController.navigate(route)
+        }
+    }
+
     LaunchedEffect(Unit) {
-        delay(2000)
-        navController.navigate(CoordinadoraRoutes.Login)
+        viewModel.validateSession()
     }
 
     Box(
