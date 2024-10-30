@@ -24,6 +24,7 @@ import com.coordinadora.coordinadoraapp.onboarding.guide.ui.MapScreen
 import com.coordinadora.coordinadoraapp.onboarding.guide.viewmodel.GuideViewModel
 import com.coordinadora.coordinadoraapp.onboarding.login.ui.LoginScreen
 import com.coordinadora.coordinadoraapp.onboarding.splash.ui.SplashScreen
+import com.coordinadora.coordinadoraapp.onboarding.splash.ui.navigateAndClearBackStack
 
 val LocalNavController =
     compositionLocalOf<NavHostController> { error("NavController not provided") }
@@ -45,7 +46,7 @@ fun App() {
 
     if (forceLogout) {
         ValidationExpiredDialog {
-            navController.navigate(CoordinadoraRoutes.Login)
+            navController.navigateAndClearBackStack(CoordinadoraRoutes.Login)
             coreViewModel.dismissForceLogout()
         }
     }

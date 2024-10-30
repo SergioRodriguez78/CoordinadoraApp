@@ -4,6 +4,8 @@ import android.app.Application
 import com.coordinadora.coordinadoraapp.database.AppDatabase
 import com.coordinadora.coordinadoraapp.database.dao.UserDao
 import com.coordinadora.coordinadoraapp.database.provider.DatabaseProvider
+import com.coordinadora.coordinadoraapp.firebase.FirebaseManager
+import com.coordinadora.coordinadoraapp.firebase.FirebaseManagerImpl
 import com.coordinadora.coordinadoraapp.network.client.BaseApiClient
 import com.coordinadora.coordinadoraapp.network.client.VolleyClient
 import com.coordinadora.coordinadoraapp.onboarding.guide.data.ImageService
@@ -56,5 +58,11 @@ object AppModule {
     @Singleton
     fun provideUserDao(database: AppDatabase): UserDao {
         return database.userDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseManager(): FirebaseManager {
+        return FirebaseManagerImpl()
     }
 }

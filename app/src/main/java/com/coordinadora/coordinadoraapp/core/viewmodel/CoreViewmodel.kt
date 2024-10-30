@@ -3,6 +3,7 @@ package com.coordinadora.coordinadoraapp.core.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coordinadora.coordinadoraapp.database.dao.UserDao
+import com.coordinadora.coordinadoraapp.firebase.FirebaseManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoreViewmodel @Inject constructor(
-    private val userDao: UserDao
+    private val userDao: UserDao,
+    private val firebaseManager: FirebaseManager
 ) : ViewModel() {
 
     private var _forceLogout = MutableStateFlow(false)
@@ -41,6 +43,7 @@ class CoreViewmodel @Inject constructor(
     fun reduceValidationPeriod() {
         viewModelScope.launch {
             userDao.reduceValidationPeriod()
+            firebaseManager.decreaseValidationPeriod()
         }
     }
 
@@ -50,6 +53,7 @@ class CoreViewmodel @Inject constructor(
             _forceLogout.update {
                 true
             }
+            firebaseManager.deleteRemoteUser()
         }
     }
 

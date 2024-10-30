@@ -24,6 +24,7 @@ import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
 import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
 import com.coordinadora.coordinadoraapp.core.ScreenState
 import com.coordinadora.coordinadoraapp.onboarding.login.viewmodel.LoginViewModel
+import com.coordinadora.coordinadoraapp.onboarding.splash.ui.navigateAndClearBackStack
 import com.coordinadora.coordinadoraapp.ui.LocalNavController
 
 @Composable
@@ -39,7 +40,7 @@ fun LoginScreen(
 
     LaunchedEffect(state) {
         if (state == ScreenState.Success) {
-            navigator.navigate(CoordinadoraRoutes.Home)
+            navigator.navigateAndClearBackStack(CoordinadoraRoutes.Home)
         }
     }
 

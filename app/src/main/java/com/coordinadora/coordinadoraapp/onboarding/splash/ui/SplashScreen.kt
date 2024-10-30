@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.theme.DarkBlue
 import com.coordinadora.coordinadoraapp.onboarding.splash.viewmodel.SplashViewModel
@@ -31,7 +32,7 @@ fun SplashScreen(
     LaunchedEffect(navigateTo) {
         navigateTo?.let { route ->
             delay(2000)
-            navController.navigate(route)
+            navController.navigateAndClearBackStack(route)
         }
     }
 
@@ -52,4 +53,13 @@ fun SplashScreen(
             contentDescription = null
         )
     }
+}
+
+fun <T : Any> NavHostController.navigateAndClearBackStack(route: T) {
+    this.navigate(route) {
+        popUpTo(this@navigateAndClearBackStack.graph.id) {
+            inclusive = true
+        }
+    }
+
 }

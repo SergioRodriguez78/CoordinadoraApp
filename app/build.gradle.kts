@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization) apply true
     alias(libs.plugins.hilt.android) apply true
+    alias(libs.plugins.firebase) apply true
     id("kotlin-kapt")
 }
 
@@ -83,6 +84,10 @@ dependencies {
     // Room
     implementation(libs.room)
     kapt(libs.room.compiler)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
 
 }
 

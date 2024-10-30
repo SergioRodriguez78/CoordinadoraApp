@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.coordinadora.coordinadoraapp.core.ScreenState
 import com.coordinadora.coordinadoraapp.database.dao.UserDao
 import com.coordinadora.coordinadoraapp.database.mapper.toUser
+import com.coordinadora.coordinadoraapp.firebase.FirebaseManager
 import com.coordinadora.coordinadoraapp.onboarding.login.data.remote.AuthenticationService
 import com.coordinadora.coordinadoraapp.onboarding.login.model.dto.AuthenticationResponseDto
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val service: AuthenticationService,
-    private val dao: UserDao
+    private val dao: UserDao,
+    private val firebase: FirebaseManager
 ) : ViewModel() {
 
     private var _username = MutableStateFlow("")
@@ -69,6 +71,8 @@ class LoginViewModel @Inject constructor(
     private fun saveUser(username: String, dto: AuthenticationResponseDto) {
         viewModelScope.launch(Dispatchers.IO) {
             dao.save(dto.toUser(username))
+
+            firebase.createRemoteUser(dto.periodValidation)
         }
     }
 }

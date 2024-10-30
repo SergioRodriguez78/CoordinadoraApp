@@ -33,6 +33,9 @@ mapsCompose = "6.1.0"
 roomCompiler = "2.6.1"
 roomKtx = "2.6.1"
 
+### Firebase
+firebaseBom = "33.5.1"
+googleServices = "4.4.2"
 
 [libraries]
 ## Android base dependencies
@@ -75,6 +78,10 @@ maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = 
 room = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 
+### Firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+
 [plugins]
 ## Android base pluggins
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -86,3 +93,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 
 ### Hilt
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
+
+### Firebase
+firebase = { id = "com.google.gms.google-services", version.ref = "googleServices" }
