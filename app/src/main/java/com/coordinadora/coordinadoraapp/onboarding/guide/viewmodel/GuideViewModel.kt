@@ -32,12 +32,14 @@ class GuideViewModel @Inject constructor(
     val locations = _locations.asStateFlow()
 
     fun getData() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 _state.update { ScreenState.Loading }
 
-                service.getImage(
-                    onResponse = { response ->
+                val result = service.getImage()
+
+                result
+                    .onSuccess { response ->
                         if (!response.isError) {
 
                             _locations.update { response.locations }
@@ -48,13 +50,11 @@ class GuideViewModel @Inject constructor(
 
                             _state.update { ScreenState.None }
                         }
-                    },
-                    onError = {
-                        it.printStackTrace()
+                    }.onFailure { error ->
+                        _state.update { ScreenState.Error(error.message.orEmpty()) }
                     }
-                )
             } catch (e: Exception) {
-                _state.update { ScreenState.Error }
+                _state.update { ScreenState.Error(e.message.orEmpty()) }
             }
         }
     }

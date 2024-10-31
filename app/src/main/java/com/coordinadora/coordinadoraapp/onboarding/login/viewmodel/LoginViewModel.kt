@@ -41,29 +41,34 @@ class LoginViewModel @Inject constructor(
     }
 
     fun login(username: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 _state.update { ScreenState.Loading }
-                service.login(
+
+                val result = service.login(
                     username = username,
                     password = password,
-                    onResponse = { response ->
+                )
+
+                // Can be used a repository pattern to handle the result
+                result
+                    .onSuccess { response ->
                         if (!response.isError) {
                             _state.update { ScreenState.Success }
 
                             saveUser(username = username, dto = response)
 
                         } else {
-                            _state.update { ScreenState.Error }
+                            _state.update { ScreenState.Error(response.message.orEmpty()) }
                         }
-                    },
-                    onError = { error ->
+
+                    }.onFailure { error ->
                         error.printStackTrace()
-                        _state.update { ScreenState.Error }
+                        _state.update { ScreenState.Error(error.cause?.localizedMessage.orEmpty()) }
                     }
-                )
+
             } catch (e: Exception) {
-                _state.update { ScreenState.Error }
+                _state.update { ScreenState.Error(e.cause?.localizedMessage.orEmpty()) }
             }
         }
     }
@@ -73,6 +78,14 @@ class LoginViewModel @Inject constructor(
             dao.save(dto.toUser(username))
 
             firebase.createRemoteUser(dto.periodValidation)
+        }
+    }
+
+    fun dismissDialog() {
+        viewModelScope.launch {
+            _state.update { ScreenState.None }
+            _username.update { "" }
+            _password.update { "" }
         }
     }
 }

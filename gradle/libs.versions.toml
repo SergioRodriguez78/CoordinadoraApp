@@ -37,6 +37,10 @@ roomKtx = "2.6.1"
 firebaseBom = "33.5.1"
 googleServices = "4.4.2"
 
+### Testing
+mockk = "1.13.13"
+kotlinxCoroutinesTest = "1.9.0"
+
 [libraries]
 ## Android base dependencies
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -81,6 +85,10 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCom
 ### Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+
+### Testing
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 ## Android base pluggins

@@ -21,8 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coordinadora.coordinadoraapp.R
 import com.coordinadora.coordinadoraapp.atomicDesign.atoms.CoordinadoraButton
-import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
+import com.coordinadora.coordinadoraapp.atomicDesign.organism.DialogError
 import com.coordinadora.coordinadoraapp.core.ScreenState
+import com.coordinadora.coordinadoraapp.navigation.routes.CoordinadoraRoutes
 import com.coordinadora.coordinadoraapp.onboarding.login.viewmodel.LoginViewModel
 import com.coordinadora.coordinadoraapp.onboarding.splash.ui.navigateAndClearBackStack
 import com.coordinadora.coordinadoraapp.ui.LocalNavController
@@ -95,4 +96,10 @@ fun LoginScreen(
         }
     }
 
+    if(state is ScreenState.Error){
+        DialogError(
+            message = (state as ScreenState.Error).message,
+            onDismiss = { viewModel.dismissDialog() }
+        )
+    }
 }

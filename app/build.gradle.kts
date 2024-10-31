@@ -89,6 +89,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
 
+    // TEST
+
+    testImplementation (libs.junit)
+    testImplementation (libs.mockk)
+    testImplementation (libs.kotlinx.coroutines.test)
+
 }
 
 kapt {
