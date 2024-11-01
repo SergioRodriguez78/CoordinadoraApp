@@ -30,8 +30,18 @@ jobs:
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew assembleRelease
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.RELEASE_KEYSTORE }}" > keystore.b64
+          base64 -d keystore.b64 > release.keystore
+
+      - name: Build Release APK
+        run: |
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file=${{ github.workspace }}/release.keystore \
+            -Pandroid.injected.signing.store.password=${{ secrets.KEYSTORE_PASSWORD }} \
+            -Pandroid.injected.signing.key.alias=${{ secrets.KEY_ALIAS }} \
+            -Pandroid.injected.signing.key.password=${{ secrets.KEY_PASSWORD }}
 
       - name: Run Unit Tests
         run: ./gradlew test --stacktrace
@@ -42,5 +52,5 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID}}
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: testers
-          file: app/build/outputs/apk/release/app-release-unsigned.apk
+          file: app/build/outputs/apk/release/app-release.apk
 

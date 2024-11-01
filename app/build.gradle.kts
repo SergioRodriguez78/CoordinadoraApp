@@ -12,6 +12,15 @@ android {
     namespace = "com.coordinadora.coordinadoraapp"
     compileSdk = 34
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(System.getenv("KEYSTORE_FILE") ?: "release.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: ""
+            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+        }
+    }
+
     defaultConfig {
         applicationId = "com.coordinadora.coordinadoraapp"
         minSdk = 24
@@ -29,6 +38,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Agrega esta línea para usar la configuración de firma
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
