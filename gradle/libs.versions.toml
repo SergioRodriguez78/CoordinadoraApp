@@ -10,6 +10,37 @@ lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.04.01"
 
+## Navigation
+navcompose = "2.8.3"
+
+## Serialization
+kotlinxSerialization = "1.7.1"
+
+### Network
+volley = "1.2.1"
+
+### Hilt
+hiltAndroid = "2.52"
+hiltNavigationCompose = "1.2.0"
+
+### Coil
+coilCompose = "2.7.0"
+
+### Maps
+mapsCompose = "6.1.0"
+
+### Room
+roomCompiler = "2.6.1"
+roomKtx = "2.6.1"
+
+### Firebase
+firebaseBom = "33.5.1"
+googleServices = "4.4.2"
+
+### Testing
+mockk = "1.13.13"
+kotlinxCoroutinesTest = "1.9.0"
+
 [libraries]
 ## Android base dependencies
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,8 +58,37 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
-## Android base dependencies
+## Navigation
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navcompose" }
 
+### Serialization
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+
+### Network
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
+
+### Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
+### Coil
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+
+### Maps
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
+
+### Room
+room = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+
+### Firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
+
+### Testing
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 ## Android base pluggins
@@ -36,3 +96,11 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
+### Serialization
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+
+### Hilt
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
+
+### Firebase
+firebase = { id = "com.google.gms.google-services", version.ref = "googleServices" }

@@ -2,11 +2,24 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization) apply true
+    alias(libs.plugins.hilt.android) apply true
+    alias(libs.plugins.firebase) apply true
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.coordinadora.coordinadoraapp"
     compileSdk = 34
+
+    signingConfigs {
+        create("release") {
+            storeFile = file(System.getenv("KEYSTORE_FILE") ?: "release.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: ""
+            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+        }
+    }
 
     defaultConfig {
         applicationId = "com.coordinadora.coordinadoraapp"
@@ -25,6 +38,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Agrega esta línea para usar la configuración de firma
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {
@@ -56,4 +71,43 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Navigation
+    implementation(libs.navigation.compose)
+
+    // Serialization
+    implementation(libs.kotlinx.serialization)
+
+    // Network
+    implementation(libs.volley)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation (libs.hilt.navigation.compose)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // Maps
+    implementation(libs.maps.compose)
+
+    // Room
+    implementation(libs.room)
+    kapt(libs.room.compiler)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+
+    // TEST
+
+    testImplementation (libs.junit)
+    testImplementation (libs.mockk)
+    testImplementation (libs.kotlinx.coroutines.test)
+
+}
+
+kapt {
+    correctErrorTypes = true
 }

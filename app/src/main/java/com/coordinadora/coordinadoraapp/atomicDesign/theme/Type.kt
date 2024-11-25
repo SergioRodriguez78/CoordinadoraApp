@@ -1,4 +1,4 @@
-package com.coordinadora.coordinadoraapp.ui.theme
+package com.coordinadora.coordinadoraapp.atomicDesign.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
